@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
-import type { ReactNode } from "react";
 import { Logo } from "@/components/Logo";
+import PartnerForm from "@/components/PartnerForm";
 
 function IconMap({ className = "h-7 w-7" }: { className?: string }) {
   return (
@@ -333,34 +333,6 @@ const CONTACT_LINKS = [
   },
 ] as const;
 
-const HEAR_ABOUT_OPTIONS = [
-  "Search engine",
-  "Social media",
-  "Referral",
-  "Event or conference",
-  "Other",
-] as const;
-
-function FieldLabel({
-  htmlFor,
-  children,
-  required,
-}: {
-  htmlFor: string;
-  children: ReactNode;
-  required?: boolean;
-}) {
-  return (
-    <label htmlFor={htmlFor} className="mb-1.5 block text-sm font-medium text-slate-200">
-      {children}
-      {required && <span className="text-[#10b981]"> *</span>}
-    </label>
-  );
-}
-
-const inputClass =
-  "w-full rounded-xl border border-white/10 bg-white/5 px-4 py-2.5 text-sm text-white placeholder:text-slate-500 outline-none transition focus:border-[#10b981]/50 focus:ring-2 focus:ring-[#10b981]/20";
-
 export function PartnerSection() {
   return (
     <section
@@ -376,16 +348,6 @@ export function PartnerSection() {
         className="pointer-events-none absolute -right-24 bottom-0 h-80 w-80 rounded-full bg-slate-700/40 blur-3xl"
         aria-hidden
       />
-
-      {/* Static form for Netlify build-time detection */}
-      <form name="partner" data-netlify="true" data-netlify-honeypot="bot-field" hidden>
-        <input name="fullName" />
-        <input name="email" />
-        <input name="company" />
-        <input name="source" />
-        <input name="subject" />
-        <textarea name="message" />
-      </form>
 
       <div className="relative mx-auto grid max-w-6xl gap-12 px-4 sm:px-6 lg:grid-cols-2 lg:gap-16 lg:py-8">
         <div>
@@ -430,116 +392,7 @@ export function PartnerSection() {
 
         <div>
           <h3 className="text-xl font-bold text-white">Partner With Us</h3>
-          <form
-            name="partner"
-            method="POST"
-            data-netlify="true"
-            data-netlify-honeypot="bot-field"
-            className="mt-6 space-y-4"
-          >
-            <input type="hidden" name="form-name" value="partner" />
-            <p className="hidden">
-              <label>
-                Don&apos;t fill this out: <input name="bot-field" />
-              </label>
-            </p>
-
-            <div>
-              <FieldLabel htmlFor="fullName" required>
-                Full Name
-              </FieldLabel>
-              <input
-                id="fullName"
-                name="fullName"
-                type="text"
-                required
-                placeholder="Enter your full name"
-                className={inputClass}
-              />
-            </div>
-
-            <div>
-              <FieldLabel htmlFor="email" required>
-                Email Address
-              </FieldLabel>
-              <input
-                id="email"
-                name="email"
-                type="email"
-                required
-                placeholder="email@domain.com"
-                className={inputClass}
-              />
-            </div>
-
-            <div>
-              <FieldLabel htmlFor="company">Company Name</FieldLabel>
-              <input
-                id="company"
-                name="company"
-                type="text"
-                placeholder="Enter your company name"
-                className={inputClass}
-              />
-            </div>
-
-            <div>
-              <FieldLabel htmlFor="source" required>
-                How did you hear about us?
-              </FieldLabel>
-              <select id="source" name="source" required className={inputClass} defaultValue="">
-                <option value="" disabled>
-                  Select one
-                </option>
-                {HEAR_ABOUT_OPTIONS.map((opt) => (
-                  <option key={opt} value={opt} className="bg-slate-900">
-                    {opt}
-                  </option>
-                ))}
-              </select>
-            </div>
-
-            <div>
-              <FieldLabel htmlFor="subject" required>
-                Subject
-              </FieldLabel>
-              <input
-                id="subject"
-                name="subject"
-                type="text"
-                required
-                placeholder="Enter a subject"
-                className={inputClass}
-              />
-            </div>
-
-            <div>
-              <FieldLabel htmlFor="message" required>
-                Message
-              </FieldLabel>
-              <textarea
-                id="message"
-                name="message"
-                required
-                rows={4}
-                maxLength={1000}
-                placeholder="How can we help?"
-                className={`${inputClass} resize-y`}
-              />
-            </div>
-
-            <button
-              type="submit"
-              className="w-full rounded-full bg-[#10b981] py-3 text-sm font-semibold text-[#020617] transition hover:bg-[#34d399]"
-            >
-              Send Message
-            </button>
-
-            <p className="text-xs text-slate-500">
-              By proceeding, you agree to our Terms &amp; Conditions and Privacy
-              Policy.
-            </p>
-          </form>
+          <PartnerForm />
         </div>
       </div>
     </section>

@@ -2,6 +2,7 @@ import {
   DownloadSection,
   FeaturesSection,
   HeroSection,
+  PartnerSection,
   SiteFooter,
 } from "@/components/sections";
 
@@ -11,6 +12,7 @@ export default function HomePage() {
       <HeroSection />
       <FeaturesSection />
       <DownloadSection />
+      <PartnerSection />
       <SiteFooter />
     </main>
   );
